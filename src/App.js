@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import Creator from './Creator'
+import Trackers from './Trackers';
+import { connect } from 'react-redux';
+import {addTimer, stepTimer, saveStateToStorageThunkCreator, getStateFromStorageThunkCreator, deleteTimer, setRunning } from './redux/tracker-reducer';
 
-function App() {
+
+
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <Creator {...props} />
+        <Trackers {...props} />
+        
     </div>
   );
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return {
+    timers: state.timers,
+    numberOfTimers: state.numberOfTimers
+  }
+}
+
+const AppWrapper = connect(mapStateToProps, {
+  addTimer,
+  stepTimer,
+  saveState: saveStateToStorageThunkCreator,
+  restoreState: getStateFromStorageThunkCreator,
+  deleteTimer,
+  setRun: setRunning
+})(App)
+
+
+
+
+
+
+
+export default AppWrapper;

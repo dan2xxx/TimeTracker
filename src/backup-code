@@ -1,0 +1,190 @@
+import moment from 'moment';
+
+const initalState = {
+    
+    id: null,
+    savedTime: null,
+    runing: false,
+    simpleTimer: 0
+    
+}
+
+const trackerReducer = (state = initalState, action) => {
+    switch (action.type) {
+        case 'SAVED-TIME':
+            return ({
+                ...state,
+                savedTime: action.currentTime
+            })
+
+        case 'ADD-DIFF':
+            return ({
+                ...state,
+                difference: action.diff
+            })
+
+        case 'SET-RUN':
+            return ({
+                ...state,
+                runing: action.bool
+            })
+
+        case 'ADD-SEC':
+            
+            return ({
+                ...state,
+                simpleTimer: state.simpleTimer + 1
+            })
+
+        case 'RESTORE': 
+            return ({
+                ...action.newState
+            })
+
+        case 'DELETE':
+            return ({
+                ...initalState
+            })
+
+
+        default:
+            return state
+    }
+
+}
+
+
+export const setTimerAC = (currentTime) => ({type: 'SAVED-TIME', currentTime})
+export const setDiffAC = (diff) => ({type: 'ADD-DIFF', diff})
+export const setRuningAC = (bool) => ({type: 'SET-RUN', bool})
+export const addSec = () => ({type: 'ADD-SEC'})
+export const restoreState = (newState) => ({type: 'RESTORE', newState})
+export const deleteTimer = (id) => ({type: 'DELETE', id})
+
+
+export const saveStateToStorageThunkCreator = () => {
+    return (dispatch, getState) => {
+       (window.localStorage.setItem('state', JSON.stringify(getState())))
+      
+    }
+}
+
+export const getStateFromStorageThunkCreator = () => {
+    return ((dispatch) => {
+        
+
+        const restoredState = JSON.parse(window.localStorage.getItem('state'))
+
+        if (!restoredState) {
+            dispatch(restoreState(initalState))
+        }
+        
+        if (restoredState.runing) {
+            const currentTime = moment()
+            const difference = currentTime.diff(restoredState.savedTime, 'seconds')
+            const newState = {
+                ...restoredState,
+                simpleTimer: restoredState.simpleTimer + difference
+            }
+            dispatch(restoreState(newState))
+        } else {
+            const newState = {
+                ...restoredState
+            }
+            dispatch(restoreState(newState))
+        }
+     
+    })
+}
+
+
+
+
+
+
+export default trackerReducer
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+import React, {useState, useEffect} from 'react'
+import { useForm } from "react-hook-form";
+import moment from 'moment';
+
+
+
+const Header = (props) => {
+ 
+    const { register, handleSubmit, reset } = useForm();
+    
+    const remove = () => {
+        props.setRun(false)
+        props.deleteTimer()
+        props.saveState()
+    }
+
+    const stop = () => {
+        props.setRun(false)
+    }
+
+    const start = () => {
+        props.setRun(true)
+        
+    }
+
+    const onSubmit = (e) => {
+        props.setRun(true)
+      }
+
+    const timerEngine = () => {
+        
+        props.addTimer(moment())
+        props.addSec()
+        props.saveState()
+    }
+
+    
+    useEffect(() => {
+         
+        if (props.runing) {
+            const interval = setTimeout(() => timerEngine(), 1000)
+        }
+                
+                 
+    }, [props.runing, props.simpleTimer])
+
+    
+    useEffect(() => {
+        props.restoreState()
+    },[])
+   
+        
+    
+    
+   
+    return (
+        <div>
+            <h1>tracker</h1>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+
+                <input name="tracker-name"  ref={register} placeholder='Enter tracker name' />
+                <input type="submit" />
+
+            </form>
+            <h2>{props.simpleTimer}</h2>
+            
+            <button onClick={() => {stop()}}>stop</button>
+            <button onClick={() => {start()}}>start</button>
+            <button onClick={() => {remove()}}>delete</button>
+
+        </div>
+    )
+}
+
+
+export default Header
