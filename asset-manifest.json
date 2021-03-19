@@ -1,22 +1,26 @@
 {
   "files": {
-    "main.css": "/TimeTracker/static/css/main.0bc2f734.chunk.css",
-    "main.js": "/TimeTracker/static/js/main.10885f91.chunk.js",
-    "main.js.map": "/TimeTracker/static/js/main.10885f91.chunk.js.map",
-    "runtime-main.js": "/TimeTracker/static/js/runtime-main.51046e20.js",
-    "runtime-main.js.map": "/TimeTracker/static/js/runtime-main.51046e20.js.map",
-    "static/js/2.84ac246e.chunk.js": "/TimeTracker/static/js/2.84ac246e.chunk.js",
-    "static/js/2.84ac246e.chunk.js.map": "/TimeTracker/static/js/2.84ac246e.chunk.js.map",
-    "static/js/3.52ad6636.chunk.js": "/TimeTracker/static/js/3.52ad6636.chunk.js",
-    "static/js/3.52ad6636.chunk.js.map": "/TimeTracker/static/js/3.52ad6636.chunk.js.map",
+    "main.css": "/TimeTracker/static/css/main.71da17b7.chunk.css",
+    "main.js": "/TimeTracker/static/js/main.14237979.chunk.js",
+    "main.js.map": "/TimeTracker/static/js/main.14237979.chunk.js.map",
+    "runtime-main.js": "/TimeTracker/static/js/runtime-main.581a1f33.js",
+    "runtime-main.js.map": "/TimeTracker/static/js/runtime-main.581a1f33.js.map",
+    "static/js/2.c800db16.chunk.js": "/TimeTracker/static/js/2.c800db16.chunk.js",
+    "static/js/2.c800db16.chunk.js.map": "/TimeTracker/static/js/2.c800db16.chunk.js.map",
+    "static/js/3.e41d2685.chunk.js": "/TimeTracker/static/js/3.e41d2685.chunk.js",
+    "static/js/3.e41d2685.chunk.js.map": "/TimeTracker/static/js/3.e41d2685.chunk.js.map",
     "index.html": "/TimeTracker/index.html",
-    "static/css/main.0bc2f734.chunk.css.map": "/TimeTracker/static/css/main.0bc2f734.chunk.css.map",
-    "static/js/2.84ac246e.chunk.js.LICENSE.txt": "/TimeTracker/static/js/2.84ac246e.chunk.js.LICENSE.txt"
+    "static/css/main.71da17b7.chunk.css.map": "/TimeTracker/static/css/main.71da17b7.chunk.css.map",
+    "static/js/2.c800db16.chunk.js.LICENSE.txt": "/TimeTracker/static/js/2.c800db16.chunk.js.LICENSE.txt",
+    "static/media/add_circle-24px.b7bb9a46.svg": "/TimeTracker/static/media/add_circle-24px.b7bb9a46.svg",
+    "static/media/pause-24px.e3fdb852.svg": "/TimeTracker/static/media/pause-24px.e3fdb852.svg",
+    "static/media/play_arrow-24px.f303159b.svg": "/TimeTracker/static/media/play_arrow-24px.f303159b.svg",
+    "static/media/remove_circle_outline-24px.594713c1.svg": "/TimeTracker/static/media/remove_circle_outline-24px.594713c1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.51046e20.js",
-    "static/js/2.84ac246e.chunk.js",
-    "static/css/main.0bc2f734.chunk.css",
-    "static/js/main.10885f91.chunk.js"
+    "static/js/runtime-main.581a1f33.js",
+    "static/js/2.c800db16.chunk.js",
+    "static/css/main.71da17b7.chunk.css",
+    "static/js/main.14237979.chunk.js"
   ]
 }
