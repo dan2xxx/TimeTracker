@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import moment from 'moment';
+import React, {useEffect} from 'react'
+import playIcon from './../svg/play_arrow-24px.svg'
+import pauseIcon from './../svg/pause-24px.svg'
+import removeIcon from './../svg/remove_circle_outline-24px.svg'
+
 
 const TrackerItem = (props) => {
  
-    //debugger
-
     const remove = () => {
         props.deleteTimer(props.id)
        
@@ -29,7 +30,7 @@ const TrackerItem = (props) => {
 
     
     useEffect(() => {
-        //console.log('useeffect')
+        
         if (props.running) {
             const interval = setTimeout(() => timerEngine(), 1000)
         }
@@ -88,10 +89,8 @@ const TrackerItem = (props) => {
         <div>
             <h3>{props.name}</h3>
             {display()}
-            
-            <button onClick={() => {stop()}}>stop</button>
-            <button onClick={() => {start()}}>start</button>
-            <button onClick={() => {remove()}}>delete</button>
+            {props.running ? <button onClick={() => {stop()}}><img src={pauseIcon}></img></button> : <button onClick={() => {start()}}><img src={playIcon}></img></button>}
+            <button onClick={() => {remove()}}><img src={removeIcon}></img></button>
         </div>
     )
 }
