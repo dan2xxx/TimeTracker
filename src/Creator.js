@@ -24,7 +24,7 @@ const Creator = (props) => {
         
         const newTracker = {
             id: generateID(),
-            name: data['tracker-name'] || moment().format(),
+            name: data['tracker-name'] || moment().format("dddd, MMMM Do YYYY, h:mm:ss a"),
             savedTime: moment(),
             running: true,
             simpleTimer: 1

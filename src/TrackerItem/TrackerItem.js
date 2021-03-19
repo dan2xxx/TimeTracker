@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import playIcon from './../svg/play_arrow-24px.svg'
 import pauseIcon from './../svg/pause-24px.svg'
 import removeIcon from './../svg/remove_circle_outline-24px.svg'
-
+import './TrackerItem.css'
 
 const TrackerItem = (props) => {
  
@@ -71,11 +71,11 @@ const TrackerItem = (props) => {
         }
 
         const output = 
-        <p>
+        <>
         {display.hh < 1 ? '00' : display.hh < 10 ? '0' + display.hh : display.hh}
         :{display.mm < 1 ? '00' : display.mm < 10 ? '0' + display.mm : display.mm}
         :{display.ss < 10 ? '0' + display.ss : display.ss}
-        </p>
+        </>
 
 
 
@@ -84,13 +84,28 @@ const TrackerItem = (props) => {
         return output
     }
 
+    const displayStyleSwitcher = () => {
+        if (props.running) {
+            return 'timer active'
+        } else {
+            return 'timer paused'
+        }
+    } 
+
 
     return (
-        <div>
-            <h3>{props.name}</h3>
-            {display()}
+        <div className='item-contaner'>
+            
+            <div className='tracker-name'>{props.name}</div>
+            
+            <div className={displayStyleSwitcher()}>{display()}</div>
+            
+            <div className='buttons'>
             {props.running ? <button onClick={() => {stop()}}><img src={pauseIcon}></img></button> : <button onClick={() => {start()}}><img src={playIcon}></img></button>}
             <button onClick={() => {remove()}}><img src={removeIcon}></img></button>
+            </div>
+            
+            
         </div>
     )
 }

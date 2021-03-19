@@ -1,0 +1,64 @@
+button {
+    display: inline-block;
+    color: #fff;
+    background-color: transparent;
+    border: 0px solid #fff;
+    border-radius: 30px;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+}
+
+.item-contaner {
+
+    margin-top: 10px;
+    background-color: rgb(242, 241, 255);
+    border-radius: 10px;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2vw;
+    grid-template-areas: 
+    "name name"
+    "timer buttons";
+}
+
+.tracker-name {
+    grid-area: name;
+    font-size: 16px;
+    font-weight: 700;
+    
+}
+
+.timer {
+    grid-area: timer;
+    font-weight: 600;
+    
+}
+
+.active {
+    color: green;
+}
+
+.paused {
+    color: rgb(175, 48, 48);
+    -webkit-animation: blink2 1s linear infinite;
+    animation: blink2 1s linear infinite;
+}
+
+@-webkit-keyframes blink2 {
+    100% { color: rgba(34, 34, 34, 0); }
+  }
+@keyframes blink2 {
+    100% { color: rgba(34, 34, 34, 0); }
+  }
+
+
+
+.buttons {
+    grid-area: buttons;
+    margin-left: 50px;
+    
+}
+
