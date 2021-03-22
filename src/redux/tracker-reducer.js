@@ -63,9 +63,14 @@ const trackerReducer = (state = initalState, action) => {
         case 'RESTORE':
             {
                 const newTimers = action.newState.timers.map((el) => {
-                    const difference =  moment().diff(el.savedTime, 'seconds')
-                    el.simpleTimer += difference
-                    return el
+                    if (el.running) {
+                        const difference =  moment().diff(el.savedTime, 'seconds')
+                        el.simpleTimer += difference
+                        return el
+                    } else {
+                        return el
+                    }
+                    
                 })
 
                 //debugger    
