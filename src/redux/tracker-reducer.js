@@ -1,10 +1,7 @@
 import moment from 'moment';
 
 const initalState = {
-    
     timers: []
-
-    
 }
 
 const trackerReducer = (state = initalState, action) => {
@@ -16,64 +13,62 @@ const trackerReducer = (state = initalState, action) => {
             })
 
         case 'STEP':
-            
-            {
-            let newObj = state.timers.filter((el) => {
-                if (el.id === action.id) {
-                    return el
-                }
-            })  
-            
-            let currentTimerObj = newObj[0]
-            
 
-            if (currentTimerObj) {
-                const savedTime = moment()
-                const simpleTimer = currentTimerObj.simpleTimer + 1
-                const nextCurrentTimerObj = {
-                    ...currentTimerObj,
-                    savedTime,
-                    simpleTimer
-                }
-    
-                const newTimers = state.timers.map((el) => {
-                    if (el.id == action.id) {
-                        return nextCurrentTimerObj
-                    } else {
+            {
+                let newObj = state.timers.filter((el) => {
+                    if (el.id === action.id) {
                         return el
                     }
                 })
 
+                let currentTimerObj = newObj[0]
+
+
+                if (currentTimerObj) {
+                    const savedTime = moment()
+                    const simpleTimer = currentTimerObj.simpleTimer + 1
+                    const nextCurrentTimerObj = {
+                        ...currentTimerObj,
+                        savedTime,
+                        simpleTimer
+                    }
+
+                    const newTimers = state.timers.map((el) => {
+                        if (el.id == action.id) {
+                            return nextCurrentTimerObj
+                        } else {
+                            return el
+                        }
+                    })
+
+                    return ({
+                        ...state,
+                        timers: newTimers
+                    })
+
+
+                }
+
                 return ({
-                    ...state,
-                    timers: newTimers
+                    ...state
                 })
 
-                
-            }
 
-            return ({
-                ...state
-            })
-            
-        
-        }
+            }
 
 
         case 'RESTORE':
             {
                 const newTimers = action.newState.timers.map((el) => {
                     if (el.running) {
-                        const difference =  moment().diff(el.savedTime, 'seconds')
+                        const difference = moment().diff(el.savedTime, 'seconds')
                         el.simpleTimer += difference
                         return el
                     } else {
                         return el
                     }
-                    
-                })
 
-                //debugger    
+                })
 
 
                 return ({
@@ -81,29 +76,29 @@ const trackerReducer = (state = initalState, action) => {
                     timers: newTimers
                 })
             }
-    
 
 
 
-            
 
 
-        case 'DELETE': 
+
+
+        case 'DELETE':
             {
-                
-            const newTimers = state.timers.filter((el) => {
-                if (el.id !== action.id) {
-                    return el
-                }
-            })
 
-                       
-            return ({
-                ...state,
-                timers: newTimers
-                
-            })
-        }
+                const newTimers = state.timers.filter((el) => {
+                    if (el.id !== action.id) {
+                        return el
+                    }
+                })
+
+
+                return ({
+                    ...state,
+                    timers: newTimers
+
+                })
+            }
 
 
         case 'SET-RUN':
@@ -127,7 +122,7 @@ const trackerReducer = (state = initalState, action) => {
 
 
 
-      
+
 
         default:
             return state
@@ -136,42 +131,42 @@ const trackerReducer = (state = initalState, action) => {
 }
 
 
-export const addTimer = (timer) => ({type: 'ADD-TIMER', timer})
-export const stepTimer = (id) => ({type: 'STEP', id})
-export const restoreState = (newState) => ({type: 'RESTORE', newState})
-export const deleteTimer = (id) => ({type: 'DELETE', id})
-export const setRunning = (bool, id) => ({type: 'SET-RUN', bool, id})
+export const addTimer = (timer) => ({ type: 'ADD-TIMER', timer })
+export const stepTimer = (id) => ({ type: 'STEP', id })
+export const restoreState = (newState) => ({ type: 'RESTORE', newState })
+export const deleteTimer = (id) => ({ type: 'DELETE', id })
+export const setRunning = (bool, id) => ({ type: 'SET-RUN', bool, id })
 
 
 
 
 export const saveStateToStorageThunkCreator = () => {
-    console.log('State saved')
+    //console.log('State saved')
     return (dispatch, getState) => {
-        
-       (window.localStorage.setItem('state', JSON.stringify(getState())))
-      
+
+        (window.localStorage.setItem('state', JSON.stringify(getState())))
+
     }
 }
 
 export const getStateFromStorageThunkCreator = () => {
 
-    console.log('State restored')    
+    //console.log('State restored')
     return ((dispatch) => {
-        
+
         const restoredState = JSON.parse(window.localStorage.getItem('state'))
 
-        
 
-        
+
+
         if (!restoredState) {
             dispatch(restoreState(initalState))
         } else {
             dispatch(restoreState(restoredState))
         }
-        
-        
-     
+
+
+
     })
 }
 

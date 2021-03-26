@@ -2,7 +2,7 @@ import './App.css';
 import Creator from './Creator'
 import Trackers from './Trackers';
 import { connect } from 'react-redux';
-import {addTimer, stepTimer, saveStateToStorageThunkCreator, getStateFromStorageThunkCreator, deleteTimer, setRunning } from './redux/tracker-reducer';
+import { addTimer, stepTimer, saveStateToStorageThunkCreator, getStateFromStorageThunkCreator, deleteTimer, setRunning } from './redux/tracker-reducer';
 
 
 
@@ -10,9 +10,9 @@ function App(props) {
   return (
     <div className="App">
 
-        <Creator {...props} />
-        <Trackers {...props} />
-        
+      <Creator {...props} />
+      <Trackers {...props} />
+
     </div>
   );
 }
