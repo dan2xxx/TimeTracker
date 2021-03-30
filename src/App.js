@@ -1,12 +1,11 @@
-import './App.css';
+import './App.css'
+import React from 'react'
 import Creator from './Creator'
-import Trackers from './Trackers';
-import { connect } from 'react-redux';
-import { addTimer, stepTimer, saveStateToStorageThunkCreator, getStateFromStorageThunkCreator, deleteTimer, setRunning } from './redux/tracker-reducer';
+import Trackers from './Trackers'
+import { connect } from 'react-redux'
+import { addTimer, stepTimer, saveStateToStorageThunkCreator, getStateFromStorageThunkCreator, deleteTimer, setRunning } from './redux/tracker-reducer'
 
-
-
-function App(props) {
+function App (props) {
   return (
     <div className="App">
 
@@ -14,9 +13,8 @@ function App(props) {
       <Trackers {...props} />
 
     </div>
-  );
+  )
 }
-
 
 const mapStateToProps = (state) => {
   return {
@@ -34,10 +32,4 @@ const AppWrapper = connect(mapStateToProps, {
   setRun: setRunning
 })(App)
 
-
-
-
-
-
-
-export default AppWrapper;
+export default AppWrapper

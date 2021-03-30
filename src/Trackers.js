@@ -1,17 +1,13 @@
 import React from 'react'
 import TrackerItem from './TrackerItem/TrackerItem'
 
-
-
 const Trackers = (props) => {
+  React.useEffect(() => {
+    // debugger
+  }, [props.timers])
 
-    React.useEffect(() => {
-        //debugger
-    }, [props.timers])
-
-    const listGenerator = () => {
-
-        const list = props.timers.map((el, index) => <TrackerItem
+  const listGenerator = () => {
+    const list = props.timers.map((el, index) => <TrackerItem
             key={el.id}
             index={index}
             id={el.id}
@@ -26,19 +22,16 @@ const Trackers = (props) => {
 
         />)
 
+    const reversedList = list.slice(0).reverse()
 
-        const reversedList = list.slice(0).reverse()
+    return reversedList
+  }
 
-        return reversedList
-    }
-
-
-    return (
+  return (
         <div>
             {listGenerator()}
         </div>
-    )
+  )
 }
-
 
 export default Trackers
